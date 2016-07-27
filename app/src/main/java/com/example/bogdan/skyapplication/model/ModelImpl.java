@@ -1,5 +1,6 @@
 package com.example.bogdan.skyapplication.model;
 
+import com.example.bogdan.skyapplication.model.entity.ForecastData;
 import com.example.bogdan.skyapplication.model.entity.WeatherData;
 
 import rx.Observable;
@@ -17,7 +18,7 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public Observable<WeatherData> getWeekForecastByCity(String city) {
+  public Observable<ForecastData> getWeekForecastByCity(String city) {
     return null;
   }
 }

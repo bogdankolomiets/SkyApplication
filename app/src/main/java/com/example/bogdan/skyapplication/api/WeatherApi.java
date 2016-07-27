@@ -1,5 +1,6 @@
 package com.example.bogdan.skyapplication.api;
 
+import com.example.bogdan.skyapplication.model.entity.ForecastData;
 import com.example.bogdan.skyapplication.model.entity.WeatherData;
 
 import retrofit2.http.GET;
@@ -20,9 +21,9 @@ public interface WeatherApi {
                                                @Query("appId") String appId);
 
   @GET("forecast/")
-  Observable<WeatherData> weekForecastByCity(@Query("q") String city,
-                                             @Query("units") String units,
-                                             @Query("lang") String language,
-                                             @Query("appId") String appId);
+  Observable<ForecastData> weekForecastByCity(@Query("q") String city,
+                                              @Query("units") String units,
+                                              @Query("lang") String language,
+                                              @Query("appId") String appId);
 
 }

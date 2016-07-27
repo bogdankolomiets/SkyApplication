@@ -1,5 +1,6 @@
 package com.example.bogdan.skyapplication.di.component;
 
+import com.example.bogdan.skyapplication.di.module.ApiModule;
 import com.example.bogdan.skyapplication.di.module.AppModule;
 
 import javax.inject.Singleton;
@@ -12,7 +13,7 @@ import dagger.Component;
  * @date 27.07.16
  */
 @Singleton
-@Component(modules = {AppModule.class})
+@Component(modules = {AppModule.class, ApiModule.class})
 public interface AppComponent {
 
 }

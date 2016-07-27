@@ -1,5 +1,6 @@
 package com.example.bogdan.skyapplication.model.entity;
 
+import com.example.bogdan.skyapplication.model.entity.core.City;
 import com.example.bogdan.skyapplication.model.entity.core.Main;
 import com.example.bogdan.skyapplication.model.entity.core.Weather;
 import com.example.bogdan.skyapplication.model.entity.core.Wind;
@@ -14,6 +15,14 @@ import java.util.List;
  * @date 27.07.16
  */
 public class WeatherData {
+
+  @SerializedName("id")
+  @Expose
+  private int mCityId;
+
+  @SerializedName("name")
+  @Expose
+  private String mCityName;
 
   @SerializedName("weather")
   @Expose

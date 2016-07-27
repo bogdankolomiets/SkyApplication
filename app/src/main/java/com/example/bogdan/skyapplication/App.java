@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.example.bogdan.skyapplication.di.component.AppComponent;
 import com.example.bogdan.skyapplication.di.component.DaggerAppComponent;
+import com.example.bogdan.skyapplication.di.module.ApiModule;
 import com.example.bogdan.skyapplication.di.module.AppModule;
 
 /**
@@ -24,6 +25,7 @@ public class App extends Application {
   private void resolveDependencies() {
     mAppComponent = DaggerAppComponent.builder()
         .appModule(new AppModule(this))
+        .apiModule(new ApiModule(Constants.HTTP.BASE_URL))
         .build();
   }
 
