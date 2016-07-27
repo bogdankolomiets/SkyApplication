@@ -9,5 +9,5 @@ public interface MainPresenter {
 
   void onCreate();
 
-  void OnCityChanged(String city);
+  void OnSearchClick(String city);
 }

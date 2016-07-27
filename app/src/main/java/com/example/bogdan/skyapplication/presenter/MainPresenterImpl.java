@@ -1,7 +1,10 @@
 package com.example.bogdan.skyapplication.presenter;
 
 import com.example.bogdan.skyapplication.model.Model;
+import com.example.bogdan.skyapplication.model.entity.WeatherData;
 import com.example.bogdan.skyapplication.view.MainView;
+
+import rx.Observer;
 
 /**
  * @author Bogdan Kolomiets
@@ -22,7 +25,24 @@ public class MainPresenterImpl extends BasePresenter implements MainPresenter {
   }
 
   @Override
-  public void OnCityChanged(String city) {
-    mModel.getCurrentWeatherByCity(city);
+  public void OnSearchClick(String city) {
+    mModel
+        .getCurrentWeatherByCity(city)
+        .subscribe(new Observer<WeatherData>() {
+          @Override
+          public void onCompleted() {
+
+          }
+
+          @Override
+          public void onError(Throwable e) {
+            e.printStackTrace();
+          }
+
+          @Override
+          public void onNext(WeatherData weatherData) {
+            mView.showWeatherData(weatherData);
+          }
+        });
   }
 }
