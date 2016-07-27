@@ -3,6 +3,7 @@ package com.example.bogdan.skyapplication.di.module;
 import android.content.Context;
 
 import com.example.bogdan.skyapplication.App;
+import com.example.bogdan.skyapplication.CityDataHelper;
 import com.example.bogdan.skyapplication.api.WeatherApi;
 import com.example.bogdan.skyapplication.model.Model;
 import com.example.bogdan.skyapplication.model.ModelImpl;
@@ -40,6 +41,12 @@ public class AppModule {
     return o -> ((Observable) o).subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .unsubscribeOn(Schedulers.io());
+  }
+
+  @Singleton
+  @Provides
+  CityDataHelper provideCityDataHelper(App application) {
+    return new CityDataHelper(application);
   }
 
   @Singleton
