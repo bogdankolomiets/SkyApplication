@@ -14,9 +14,15 @@ import rx.Observable;
 public interface WeatherApi {
 
   @GET("weather/")
-  Observable<WeatherData> weatherByCity(@Query("q") String city,
-                                        @Query("units") String units,
-                                        @Query("lang") String language,
-                                        @Query("appId") String appId);
+  Observable<WeatherData> currentWeatherByCity(@Query("q") String city,
+                                               @Query("units") String units,
+                                               @Query("lang") String language,
+                                               @Query("appId") String appId);
+
+  @GET("forecast/")
+  Observable<WeatherData> weekForecastByCity(@Query("q") String city,
+                                             @Query("units") String units,
+                                             @Query("lang") String language,
+                                             @Query("appId") String appId);
 
 }

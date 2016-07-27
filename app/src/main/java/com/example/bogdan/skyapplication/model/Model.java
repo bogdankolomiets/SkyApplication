@@ -1,5 +1,7 @@
 package com.example.bogdan.skyapplication.model;
 
+import com.example.bogdan.skyapplication.model.entity.WeatherData;
+
 import rx.Observable;
 
 /**
@@ -9,5 +11,7 @@ import rx.Observable;
  */
 public interface Model {
 
+  Observable<WeatherData> getCurrentWeatherByCity(String city);
 
+  Observable<WeatherData> getWeekForecastByCity(String city);
 }
