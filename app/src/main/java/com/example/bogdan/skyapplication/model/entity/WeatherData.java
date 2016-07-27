@@ -55,4 +55,12 @@ public class WeatherData {
   public double getWindSpeed() {
     return mWindData.getSpeed();
   }
+
+  public String getIcon() {
+    return mWeatherData.get(0).getIcon();
+  }
+
+  public String getCityName() {
+    return mCityName;
+  }
 }

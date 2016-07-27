@@ -1,8 +1,12 @@
 package com.example.bogdan.skyapplication.presenter;
 
+import com.example.bogdan.skyapplication.di.ActivityScope;
 import com.example.bogdan.skyapplication.model.Model;
 import com.example.bogdan.skyapplication.model.entity.WeatherData;
-import com.example.bogdan.skyapplication.view.MainView;
+import com.example.bogdan.skyapplication.presenter.mapper.CityWeatherMapper;
+import com.example.bogdan.skyapplication.view.main.MainView;
+
+import javax.inject.Inject;
 
 import rx.Observer;
 
@@ -13,10 +17,13 @@ import rx.Observer;
  */
 public class MainPresenterImpl extends BasePresenter implements MainPresenter {
   private MainView mView;
+  private final CityWeatherMapper mMapper;
 
-  public MainPresenterImpl(Model model, MainView view) {
+  @Inject
+  public MainPresenterImpl(Model model, MainView view, CityWeatherMapper mapper) {
     super(model);
     mView = view;
+    mMapper = mapper;
   }
 
   @Override
@@ -41,8 +48,12 @@ public class MainPresenterImpl extends BasePresenter implements MainPresenter {
 
           @Override
           public void onNext(WeatherData weatherData) {
-            mView.showWeatherData(weatherData);
+
           }
         });
+  }
+
+  private void showList() {
+
   }
 }

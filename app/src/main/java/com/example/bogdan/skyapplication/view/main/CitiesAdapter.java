@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.view;
+package com.example.bogdan.skyapplication.view.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +12,7 @@ import com.example.bogdan.skyapplication.R;
 import com.example.bogdan.skyapplication.model.entity.CityWeatherVO;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,9 +27,9 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.Holder> {
   private Context mContext;
   private List<CityWeatherVO> mCities;
 
-  public CitiesAdapter(Context context, List<CityWeatherVO> cities) {
+  public CitiesAdapter(Context context) {
     mContext = context;
-    mCities = cities;
+    mCities = new ArrayList<>();
   }
 
   @Override
