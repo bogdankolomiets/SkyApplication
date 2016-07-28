@@ -1,7 +1,6 @@
 package com.example.bogdan.skyapplication.view.main;
 
-import com.example.bogdan.skyapplication.model.entity.CityWeatherVO;
-import com.example.bogdan.skyapplication.model.entity.WeatherData;
+import com.example.bogdan.skyapplication.presenter.vo.CityWeatherVO;
 
 /**
  * @author Bogdan Kolomiets
@@ -11,4 +10,6 @@ import com.example.bogdan.skyapplication.model.entity.WeatherData;
 public interface MainView {
 
   void showWeatherData(CityWeatherVO weatherData);
+
+  void startCityDetailFragment(String city);
 }

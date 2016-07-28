@@ -1,16 +1,23 @@
 package com.example.bogdan.skyapplication.view.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.bogdan.skyapplication.App;
 import com.example.bogdan.skyapplication.R;
 import com.example.bogdan.skyapplication.di.module.MainViewModule;
-import com.example.bogdan.skyapplication.model.entity.CityWeatherVO;
+import com.example.bogdan.skyapplication.presenter.vo.CityWeatherVO;
 import com.example.bogdan.skyapplication.presenter.MainPresenter;
+import com.example.bogdan.skyapplication.view.detail.DetailActivity;
 
 import javax.inject.Inject;
 
@@ -28,9 +35,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
   @BindView(R.id.main_recycler)
   RecyclerView recyclerView;
 
+  @BindView(R.id.toolbar_search_field)
+  EditText searchField;
+
   @Inject
   MainPresenter presenter;
 
+  private Toolbar mToolbar;
   private LinearLayoutManager mLayoutManager;
   private CitiesAdapter mAdapter;
 
@@ -40,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     resolveDependecies();
     setContentView(R.layout.main_layout);
     ButterKnife.bind(this);
+    initToolbar();
     prepareRecyclerView();
     presenter.onCreate();
   }
@@ -49,8 +61,37 @@ public class MainActivity extends AppCompatActivity implements MainView {
   }
 
   @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.main_menu, menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.search:
+        presenter.OnSearchClick(getCity());
+        return true;
+    }
+
+    return super.onOptionsItemSelected(item);
+  }
+
+  @Override
   public void showWeatherData(CityWeatherVO weatherData) {
 
+  }
+
+  @Override
+  public void startCityDetailFragment(String city) {
+    Intent intent = new Intent(this, DetailActivity.class);
+    intent.putExtra("city", city);
+    startActivity(intent);
+  }
+
+  private void initToolbar() {
+    mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+    setSupportActionBar(mToolbar);
   }
 
   private void prepareRecyclerView() {
@@ -58,5 +99,18 @@ public class MainActivity extends AppCompatActivity implements MainView {
     recyclerView.setLayoutManager(mLayoutManager);
     mAdapter = new CitiesAdapter(this);
     recyclerView.setAdapter(mAdapter);
+  }
+
+  private boolean isSearchFieldEmpty() {
+    return searchField.getText().toString().isEmpty();
+  }
+
+  private String getCity() {
+    if (isSearchFieldEmpty()) {
+      Toast.makeText(this, "Введите пожалуйста название города", Toast.LENGTH_SHORT).show();
+      return "";
+    }
+
+    return searchField.getText().toString();
   }
 }

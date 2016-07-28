@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.model.entity;
+package com.example.bogdan.skyapplication.presenter.vo;
 
 /**
  * @author Bogdan Kolomiets

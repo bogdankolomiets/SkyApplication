@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="100dp"
+              android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/detail_row_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:fontFamily="Roboto Regular"
+        android:text="Сегодня"/>
+
+    <ImageView
+        android:id="@+id/detail_row_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/detail_row_temperature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:fontFamily="RobotoRegular"
+        android:text="+31"/>
+
+</LinearLayout>

@@ -1,5 +1,7 @@
 package com.example.bogdan.skyapplication.view.detail;
 
+import com.example.bogdan.skyapplication.model.entity.ForecastData;
+
 /**
  * @author Bogdan Kolomiets
  * @version 1
@@ -7,5 +9,5 @@ package com.example.bogdan.skyapplication.view.detail;
  */
 public interface DetailView {
 
-  void showDetailInfo();
+  void showForecast(ForecastData data);
 }

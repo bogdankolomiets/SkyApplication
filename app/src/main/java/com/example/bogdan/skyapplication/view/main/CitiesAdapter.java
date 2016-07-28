@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.bogdan.skyapplication.R;
-import com.example.bogdan.skyapplication.model.entity.CityWeatherVO;
+import com.example.bogdan.skyapplication.presenter.vo.CityWeatherVO;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

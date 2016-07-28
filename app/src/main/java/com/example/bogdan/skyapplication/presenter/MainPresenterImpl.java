@@ -33,24 +33,7 @@ public class MainPresenterImpl extends BasePresenter implements MainPresenter {
 
   @Override
   public void OnSearchClick(String city) {
-    mModel
-        .getCurrentWeatherByCity(city)
-        .subscribe(new Observer<WeatherData>() {
-          @Override
-          public void onCompleted() {
-
-          }
-
-          @Override
-          public void onError(Throwable e) {
-            e.printStackTrace();
-          }
-
-          @Override
-          public void onNext(WeatherData weatherData) {
-
-          }
-        });
+    mView.startCityDetailFragment(city);
   }
 
   private void showList() {

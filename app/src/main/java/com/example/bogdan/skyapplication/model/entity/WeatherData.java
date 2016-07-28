@@ -1,6 +1,5 @@
 package com.example.bogdan.skyapplication.model.entity;
 
-import com.example.bogdan.skyapplication.model.entity.core.City;
 import com.example.bogdan.skyapplication.model.entity.core.Main;
 import com.example.bogdan.skyapplication.model.entity.core.Weather;
 import com.example.bogdan.skyapplication.model.entity.core.Wind;
@@ -15,6 +14,13 @@ import java.util.List;
  * @date 27.07.16
  */
 public class WeatherData {
+  @SerializedName("dt_txt")
+  @Expose
+  private String mDateTxt;
+
+  @SerializedName("dt")
+  @Expose
+  private long mDate;
 
   @SerializedName("id")
   @Expose
@@ -62,5 +68,13 @@ public class WeatherData {
 
   public String getCityName() {
     return mCityName;
+  }
+
+  public long getData() {
+    return mDate;
+  }
+
+  public String getDateTxt() {
+    return mDateTxt;
   }
 }

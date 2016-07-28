@@ -4,10 +4,26 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <android.support.v7.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/main_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:background="?attr/colorPrimary">
+
+        <EditText
+            android:id="@+id/toolbar_search_field"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v7.widget.Toolbar>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/main_recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp">
 
     </android.support.v7.widget.RecyclerView>
 
