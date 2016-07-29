@@ -31,7 +31,7 @@ public class AppModule {
 
   @Singleton
   @Provides
-  Context provideApplication() {
+  App provideApplication() {
     return mApplication;
   }
 
@@ -51,7 +51,7 @@ public class AppModule {
 
   @Singleton
   @Provides
-  Model provideModel(Observable.Transformer schedulerTransformer, WeatherApi api) {
-    return new ModelImpl(schedulerTransformer, api);
+  Model provideModel(Observable.Transformer schedulerTransformer, WeatherApi api, CityDataHelper dataHelper) {
+    return new ModelImpl(schedulerTransformer, api, dataHelper);
   }
 }

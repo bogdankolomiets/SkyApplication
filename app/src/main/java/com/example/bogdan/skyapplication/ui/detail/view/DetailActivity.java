@@ -1,11 +1,14 @@
-package com.example.bogdan.skyapplication.view.detail;
+package com.example.bogdan.skyapplication.ui.detail.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,7 +18,8 @@ import com.example.bogdan.skyapplication.R;
 import com.example.bogdan.skyapplication.di.module.DetailViewModule;
 import com.example.bogdan.skyapplication.model.entity.ForecastData;
 import com.example.bogdan.skyapplication.model.entity.WeatherData;
-import com.example.bogdan.skyapplication.presenter.DetailPresenter;
+import com.example.bogdan.skyapplication.ui.detail.presenter.DetailPresenter;
+import com.example.bogdan.skyapplication.ui.main.view.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -30,6 +34,9 @@ import butterknife.ButterKnife;
  */
 public class DetailActivity extends AppCompatActivity implements DetailView, DetailAdapter.OnItemClickListener {
   private static final int LAYOUT = R.layout.detail_layout;
+
+  @BindView(R.id.detail_city)
+  TextView cityView;
 
   @BindView(R.id.detail_icon)
   ImageView iconView;
@@ -57,7 +64,8 @@ public class DetailActivity extends AppCompatActivity implements DetailView, Det
 
   private Toolbar mToolbar;
   private DetailAdapter mAdapter;
-  private LinearLayoutManager mLayoutManager;
+  private LinearLayoutManagerWithSmoothScroller mLayoutManager;
+  private String mCity;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,8 +75,9 @@ public class DetailActivity extends AppCompatActivity implements DetailView, Det
     ButterKnife.bind(this);
     initToolbar();
     prepareRecyclerView();
-    String city = getIntent().getStringExtra("city");
-    presenter.onCreate(city);
+    mCity = getIntent().getStringExtra("city");
+    setCityName(mCity);
+    presenter.onCreate(mCity);
   }
 
   private void resolveDependecies() {
@@ -76,24 +85,54 @@ public class DetailActivity extends AppCompatActivity implements DetailView, Det
   }
 
   @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
+    getMenuInflater().inflate(R.menu.detail_menu, menu);
+    presenter.onCreateOptionsMenu(menu);
+    return true;
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.add:
+        presenter.onAddClick(mCity);
+        return true;
+    }
+
+    return super.onOptionsItemSelected(item);
+  }
+
+  @Override
   public void showForecast(ForecastData data) {
     mAdapter.addData(data.getData());
   }
 
+  @Override
+  public void showCurrentWeather(WeatherData data) {
+    setupView(data);
+  }
+
+  @Override
+  public void hideAddBtn(Menu menu) {
+    menu.findItem(R.id.add).setVisible(false);
+  }
+
   public void prepareRecyclerView() {
-    mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+    mLayoutManager = new LinearLayoutManagerWithSmoothScroller(this, LinearLayoutManager.HORIZONTAL, false);
     recyclerView.setLayoutManager(mLayoutManager);
     mAdapter = new DetailAdapter(this, this);
     recyclerView.setAdapter(mAdapter);
   }
 
   @Override
-  public void onClick(WeatherData data) {
+  public void onClick(WeatherData data, int position) {
+    scroolTo(position);
     setupView(data);
   }
 
   @Override
   public boolean onSupportNavigateUp() {
+    startActivity(new Intent(this, MainActivity.class));
     finish();
     return true;
   }
@@ -103,6 +142,14 @@ public class DetailActivity extends AppCompatActivity implements DetailView, Det
     setSupportActionBar(mToolbar);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getSupportActionBar().setDisplayShowHomeEnabled(true);
+  }
+
+  private void scroolTo(int position) {
+    recyclerView.smoothScrollToPosition(position);
+  }
+
+  private void setCityName(String city) {
+    cityView.setText(city);
   }
 
   private void setupView(WeatherData data) {

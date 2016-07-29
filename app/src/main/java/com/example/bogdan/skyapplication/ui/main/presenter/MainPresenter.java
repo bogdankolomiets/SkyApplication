@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.presenter;
+package com.example.bogdan.skyapplication.ui.main.presenter;
 
 /**
  * @author Bogdan Kolomiets
@@ -10,4 +10,6 @@ public interface MainPresenter {
   void onCreate();
 
   void OnSearchClick(String city);
+
+  void onResume();
 }

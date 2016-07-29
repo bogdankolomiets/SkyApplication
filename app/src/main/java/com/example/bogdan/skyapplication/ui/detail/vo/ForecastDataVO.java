@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.presenter.vo;
+package com.example.bogdan.skyapplication.ui.detail.vo;
 
 import java.util.List;
 

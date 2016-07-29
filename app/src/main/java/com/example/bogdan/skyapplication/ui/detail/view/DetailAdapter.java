@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.view.detail;
+package com.example.bogdan.skyapplication.ui.detail.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -94,12 +94,13 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.Holder> {
 
     @Override
     public void onClick(View view) {
-     mListener.onClick(mList.get(getLayoutPosition()));
+      view.setSelected(true);
+      mListener.onClick(mList.get(getLayoutPosition()), getLayoutPosition());
     }
   }
 
   public interface OnItemClickListener {
 
-    void onClick(WeatherData data);
+    void onClick(WeatherData data, int position);
   }
 }

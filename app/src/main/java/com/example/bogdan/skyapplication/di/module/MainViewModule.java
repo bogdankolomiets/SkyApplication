@@ -2,10 +2,10 @@ package com.example.bogdan.skyapplication.di.module;
 
 import com.example.bogdan.skyapplication.di.ActivityScope;
 import com.example.bogdan.skyapplication.model.Model;
-import com.example.bogdan.skyapplication.presenter.MainPresenter;
-import com.example.bogdan.skyapplication.presenter.MainPresenterImpl;
-import com.example.bogdan.skyapplication.presenter.mapper.CityWeatherMapper;
-import com.example.bogdan.skyapplication.view.main.MainView;
+import com.example.bogdan.skyapplication.ui.main.presenter.MainPresenter;
+import com.example.bogdan.skyapplication.ui.main.presenter.MainPresenterImpl;
+import com.example.bogdan.skyapplication.ui.main.presenter.mapper.CityWeatherMapper;
+import com.example.bogdan.skyapplication.ui.main.view.MainView;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,7 +1,7 @@
-package com.example.bogdan.skyapplication.presenter.mapper;
+package com.example.bogdan.skyapplication.ui.main.presenter.mapper;
 
 import com.example.bogdan.skyapplication.di.ActivityScope;
-import com.example.bogdan.skyapplication.presenter.vo.CityWeatherVO;
+import com.example.bogdan.skyapplication.ui.main.vo.CityWeatherVO;
 import com.example.bogdan.skyapplication.model.entity.WeatherData;
 
 import javax.inject.Inject;

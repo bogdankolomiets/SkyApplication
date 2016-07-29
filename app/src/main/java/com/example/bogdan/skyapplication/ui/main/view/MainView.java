@@ -1,6 +1,6 @@
-package com.example.bogdan.skyapplication.view.main;
+package com.example.bogdan.skyapplication.ui.main.view;
 
-import com.example.bogdan.skyapplication.presenter.vo.CityWeatherVO;
+import com.example.bogdan.skyapplication.ui.main.vo.CityWeatherVO;
 
 /**
  * @author Bogdan Kolomiets

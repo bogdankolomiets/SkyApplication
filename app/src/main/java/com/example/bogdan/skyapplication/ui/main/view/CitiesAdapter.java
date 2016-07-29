@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.view.main;
+package com.example.bogdan.skyapplication.ui.main.view;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.bogdan.skyapplication.Constants;
 import com.example.bogdan.skyapplication.R;
-import com.example.bogdan.skyapplication.presenter.vo.CityWeatherVO;
+import com.example.bogdan.skyapplication.ui.main.vo.CityWeatherVO;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,10 +27,12 @@ import butterknife.ButterKnife;
 public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.Holder> {
   private Context mContext;
   private List<CityWeatherVO> mCities;
+  private OnCityClickListener mListener;
 
-  public CitiesAdapter(Context context) {
+  public CitiesAdapter(Context context, OnCityClickListener listener) {
     mContext = context;
     mCities = new ArrayList<>();
+    mListener = listener;
   }
 
   @Override
@@ -43,11 +46,11 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.Holder> {
     CityWeatherVO city = mCities.get(position);
 
     Picasso.with(mContext)
-        .load("")
+        .load(Constants.HTTP.ICON_BASE_URL + city.getIcon() + ".png")
         .into(holder.icon);
     holder.name.setText(city.getName());
     holder.description.setText(city.getDescription());
-    holder.temperature.setText(city.getTemperature());
+    holder.temperature.setText("" + city.getTemperature());
   }
 
   @Override
@@ -55,12 +58,17 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.Holder> {
     return mCities.size();
   }
 
+  public void clear() {
+    mCities.clear();
+    notifyDataSetChanged();
+  }
+
   public void addCity(CityWeatherVO city) {
     mCities.add(city);
     notifyDataSetChanged();
   }
 
-  class Holder extends RecyclerView.ViewHolder {
+  class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
     @BindView(R.id.row_weather_icon)
     ImageView icon;
 
@@ -76,6 +84,16 @@ public class CitiesAdapter extends RecyclerView.Adapter<CitiesAdapter.Holder> {
     public Holder(View itemView) {
       super(itemView);
       ButterKnife.bind(this, itemView);
+      itemView.setOnClickListener(this);
     }
+
+    @Override
+    public void onClick(View view) {
+      mListener.onClick(mCities.get(getLayoutPosition()).getName());
+    }
+  }
+
+  public interface OnCityClickListener {
+    void onClick(String city);
   }
 }

@@ -54,4 +54,51 @@ dependencies {
     apt 'com.jakewharton:butterknife-compiler:8.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:multidex:1.0.1'
+    testCompile 'com.squareup.okhttp:mockwebserver:2.7.0'
+}
+
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.7.1.201405082137"
+}
+
+def coverageSourceDirs = [
+        '../app/src/main/java'
+]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "testDebugUnitTest") {
+    group = "Reporting"
+
+    description = "Generate Jacoco coverage reports"
+
+    classDirectories = fileTree(
+            dir: '../app/build/intermediates/classes/debug',
+            excludes: ['**/R.class',
+                       '**/R$*.class',
+                       '**/*$ViewInjector*.*',
+                       '**/*$ViewBinder*.*',   //DI
+                       '**/*_MembersInjector*.*',  //DI
+                       '**/*_Factory*.*',  //DI
+                       '**/skyapplication/model/entity/*.*', //dto model
+                       '**/skyapplication/ui/detail/vo/*.*',
+                       '**/skyapplication/ui/main/vo/*.*', //vo model
+                       '**/skyapplication/di/**',
+                       '**/BuildConfig.*',
+                       '**/Manifest*.*',
+                       '**/Lambda$*.class',
+                       '**/Lambda.class',
+                       '**/*Lambda.class',
+                       '**/*Lambda*.class']
+    )
+
+    additionalSourceDirs = files(coverageSourceDirs)
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = files('../app/build/jacoco/testDebugUnitTest.exec')
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
 }

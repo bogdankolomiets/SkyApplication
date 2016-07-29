@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.presenter.vo;
+package com.example.bogdan.skyapplication.ui.main.vo;
 
 /**
  * @author Bogdan Kolomiets
@@ -30,7 +30,9 @@ public class CityWeatherVO {
     return mDescription;
   }
 
-  public int getTemperature() {
-    return mTemperature;
+  public String getTemperature() {
+    return mTemperature > 0
+        ? "+" + mTemperature + " °C"
+        : mTemperature + " °C";
   }
 }

@@ -27,13 +27,15 @@ public class CityDataHelper {
   }
 
   public void addCity(String name) {
-    SharedPreferences.Editor editor = mPreferences.edit();
-    editor.putString(name, name);
-    editor.apply();
+    if (!hasCity(name)) {
+      SharedPreferences.Editor editor = mPreferences.edit();
+      editor.putString(name, name);
+      editor.apply();
+    }
   }
 
   public String getCity(String name) {
-    if (mPreferences.contains(name)) {
+    if (hasCity(name)) {
       return mPreferences.getString(name, "");
     }
 
@@ -47,6 +49,10 @@ public class CityDataHelper {
     }
 
     return cities;
+  }
+
+  public boolean hasCity(String city) {
+    return mPreferences.contains(city);
   }
 
 }

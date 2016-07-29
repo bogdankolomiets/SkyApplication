@@ -2,7 +2,7 @@ package com.example.bogdan.skyapplication.di.component;
 
 import com.example.bogdan.skyapplication.di.ActivityScope;
 import com.example.bogdan.skyapplication.di.module.MainViewModule;
-import com.example.bogdan.skyapplication.view.main.MainActivity;
+import com.example.bogdan.skyapplication.ui.main.view.MainActivity;
 
 import dagger.Subcomponent;
 

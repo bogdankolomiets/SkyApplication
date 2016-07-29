@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.presenter;
+package com.example.bogdan.skyapplication.ui.common;
 
 import com.example.bogdan.skyapplication.model.Model;
 

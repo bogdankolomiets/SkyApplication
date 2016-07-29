@@ -1,4 +1,4 @@
-package com.example.bogdan.skyapplication.view.main;
+package com.example.bogdan.skyapplication.ui.main.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,9 +15,9 @@ import android.widget.Toast;
 import com.example.bogdan.skyapplication.App;
 import com.example.bogdan.skyapplication.R;
 import com.example.bogdan.skyapplication.di.module.MainViewModule;
-import com.example.bogdan.skyapplication.presenter.vo.CityWeatherVO;
-import com.example.bogdan.skyapplication.presenter.MainPresenter;
-import com.example.bogdan.skyapplication.view.detail.DetailActivity;
+import com.example.bogdan.skyapplication.ui.main.vo.CityWeatherVO;
+import com.example.bogdan.skyapplication.ui.main.presenter.MainPresenter;
+import com.example.bogdan.skyapplication.ui.detail.view.DetailActivity;
 
 import javax.inject.Inject;
 
@@ -29,7 +29,7 @@ import butterknife.ButterKnife;
  * @version 1
  * @date 27.07.16
  */
-public class MainActivity extends AppCompatActivity implements MainView {
+public class MainActivity extends AppCompatActivity implements MainView, CitiesAdapter.OnCityClickListener {
   private static final int LAYOUT = R.layout.main_layout;
 
   @BindView(R.id.main_recycler)
@@ -78,8 +78,13 @@ public class MainActivity extends AppCompatActivity implements MainView {
   }
 
   @Override
-  public void showWeatherData(CityWeatherVO weatherData) {
+  protected void onResume() {
+    super.onResume();
+  }
 
+  @Override
+  public void showWeatherData(CityWeatherVO weatherData) {
+    mAdapter.addCity(weatherData);
   }
 
   @Override
@@ -87,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
     Intent intent = new Intent(this, DetailActivity.class);
     intent.putExtra("city", city);
     startActivity(intent);
+    finish();
   }
 
   private void initToolbar() {
@@ -97,7 +103,7 @@ public class MainActivity extends AppCompatActivity implements MainView {
   private void prepareRecyclerView() {
     mLayoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(mLayoutManager);
-    mAdapter = new CitiesAdapter(this);
+    mAdapter = new CitiesAdapter(this, this);
     recyclerView.setAdapter(mAdapter);
   }
 
@@ -112,5 +118,10 @@ public class MainActivity extends AppCompatActivity implements MainView {
     }
 
     return searchField.getText().toString();
+  }
+
+  @Override
+  public void onClick(String city) {
+    startCityDetailFragment(city);
   }
 }
